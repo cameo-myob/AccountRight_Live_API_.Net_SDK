@@ -17,10 +17,18 @@ jobs:
           ref: ${{ github.REF }}
           fetch-depth: 0
 
-      - name: 'Run a Sonarqube analysis on the master branch'
-        run: sonar-scanner
-          -Dsonar.host.url=${{secrets.SONARQUBE_HOST}}
-          -Dsonar.login=${{secrets.SONARQUBE_TOKEN}}
-          -Dsonar.projectKey="sonar-ops-and-arch:accountright-sdk"
-          -Dsonar.projectName="AccountRight SDK"
-          -Dsonar.scm.provider=git
+      - name: Sonarscanner for dotnet
+        uses: Secbyte/dotnet-sonarscanner@v2.3
+        with:
+          buildCommand: dotnet build .
+          projectKey: arl-sdk
+          projectName: arl-sdk
+          sonarOrganisation: myob
+          sonarHostname: https://sonarqube.svc.platform.myobdev.com/
+          beginArguments: >
+              /d:sonar.verbose="true"
+              /d:sonar.cs.opencover.reportsPaths='"/path/to/coverage.xml","/path/to/coverage.2.xml"'
+              /d:sonar.coverage.exclusions='"**/*.cs","**/*.md"'
+        env:
+          SONAR_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
