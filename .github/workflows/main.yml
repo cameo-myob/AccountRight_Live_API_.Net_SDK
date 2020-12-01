@@ -23,7 +23,7 @@ jobs:
           buildCommand: dotnet build .
           projectKey: arl-sdk
           projectName: arl-sdk
-          sonarOrganisation: myob
+          sonarOrganisation: default-organization
           sonarHostname: https://sonarqube.svc.platform.myobdev.com/
           beginArguments: >
               /d:sonar.verbose="true"
