@@ -21,6 +21,6 @@ jobs:
         run: sonar-scanner
           -Dsonar.host.url=${{secrets.SONARQUBE_HOST}}
           -Dsonar.login=${{secrets.SONARQUBE_TOKEN}}
-          -Dsonar.projectKey="sonar-ops-and-arch:github-actions-demo"
-          -Dsonar.projectName="Github Actions Demo"
+          -Dsonar.projectKey="sonar-ops-and-arch:accountright-sdk"
+          -Dsonar.projectName="AccountRight SDK"
           -Dsonar.scm.provider=git
